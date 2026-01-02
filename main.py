@@ -1,4 +1,5 @@
 from stats import get_num_words, create_output
+import sys
 
 def get_book_text(filepath):
     with open(filepath) as f:
@@ -6,7 +7,12 @@ def get_book_text(filepath):
         return file_contents
 
 def main():
-    book_location = "books/frankenstein.txt"
+    #Input validation
+    if len(sys.argv) == 1:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    book_location = sys.argv[1]
     text = get_book_text(book_location)
     num_words = get_num_words(text)
     sorted_char_count = create_output(text)
@@ -20,7 +26,5 @@ def main():
     output += "============= END ==============="
 
     print(output)
-
-    
 
 main()
